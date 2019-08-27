@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "31032635395",
+    "firebase_url": "https://positive-note-ad909.firebaseio.com",
+    "project_id": "positive-note-ad909",
+    "storage_bucket": "positive-note-ad909.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31032635395:android:aa71163bc4dc1674",
+        "android_client_info": {
+          "package_name": "itp341.caceres.nicholas.positive_note.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "31032635395-at9aamo44vpiaojvtv088hv4l305d4be.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhUibmfBh-OBHqvkfwRAltPBRack0iJVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "31032635395-at9aamo44vpiaojvtv088hv4l305d4be.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

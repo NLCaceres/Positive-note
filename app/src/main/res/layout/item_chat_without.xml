@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/personUserName"
+        android:text="Akrockin47"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chatText"
+            android:text="Hey how are you doing today? I hope you are having a wonderful day and enjoy the upcoming weekend! I hope you go get some delicious Bubba Gump!"
+            android:textColor="#000000"
+            android:layout_marginStart="20dp"
+            android:maxLines="3"/>
+
+    </LinearLayout>
+
+</LinearLayout>

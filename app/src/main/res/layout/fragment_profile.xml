@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CBFF8C">
+
+
+    <!--<androidx.appcompat.widget.Toolbar-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:id="@+id/profile_toolbar"-->
+        <!--android:background="#00CCAA"-->
+        <!--android:elevation="6dp"-->
+        <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+        <!--android:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
+    <!--</androidx.appcompat.widget.Toolbar>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:id="@+id/userProfileImageView"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/privateCheckRadioGroup"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/privateRadioButton"
+                    android:text="@string/private_radio_button"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/publicRadioButton"
+                    android:text="@string/public_radio_button"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/userProfileNameTextView"
+            android:text=""
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/userBioDesTextView"
+            android:text="@string/profile_about_me"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/userBioTextView"
+            android:text=""
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:minLines="1"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/logOutButton"
+            android:text="@string/logout_button"
+            android:layout_gravity="center"
+            android:backgroundTint="#88CCF1"
+            android:layout_marginTop="100dp"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
