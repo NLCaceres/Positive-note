@@ -63,16 +63,19 @@ public class createAccount extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     public static final String PREFERENCE_FILE = "itp341.caceres.nicholas.positivenote.preferences";
-    public static final String PREFERENCE_USERNAME = "itp341.caceres.nicholas.positivenote.preferences.username";
-    public static final String PREFERENCE_USERBIO = "itp341.caceres.nicholas.positivenote.preferences.userbio";
-    public static final String PREFERENCE_IS_HELPER = "itp341.caceres.nicholas.positivenote.preferences.helper";
-    public static final String PREFERENCE_IS_BLUE = "itp341.caceres.nicholas.positivenote.preferences.blue";
-    public static final String PREFERENCE_IS_LOOK = "itp341.caceres.nicholas.positivenote.preferences.look";
-    public static final String PREFERENCE_IS_EMOTIONAL = "itp341.caceres.nicholas.positivenote.preferences.emotional";
-    public static final String PREFERENCE_IS_RELATIONSHIP = "itp341.caceres.nicholas.positivenote.preferences.relationship";
-    public static final String PREFERENCE_IS_SELF = "itp341.caceres.nicholas.positivenote.preferences.self";
-    public static final String PREFERENCE_LONGITUDE =  "itp341.caceres.nicholas.positivenote.preferences.longitude";
-    public static final String PREFERENCE_LATITUDE = "itp341.caceres.nicholas.positivenote.preferences.latitude";
+    public static final String PREFERENCE_USER_DISPLAY_NAME = PREFERENCE_FILE + ".display_name";
+    public static final String PREFERENCE_USER_EMAIL = PREFERENCE_FILE + ".user_email";
+    public static final String PREFERENCE_USERNAME = PREFERENCE_FILE + ".username";
+    public static final String PREFERENCE_USERBIO = PREFERENCE_FILE + ".userbio";
+    public static final String PREFERENCE_IS_PRIVATE = PREFERENCE_FILE + ".private";
+    public static final String PREFERENCE_IS_HELPER = PREFERENCE_FILE + ".helper";
+    public static final String PREFERENCE_IS_BLUE = PREFERENCE_FILE + ".blue";
+    public static final String PREFERENCE_IS_LOOK = PREFERENCE_FILE + ".look";
+    public static final String PREFERENCE_IS_EMOTIONAL = PREFERENCE_FILE + ".emotional";
+    public static final String PREFERENCE_IS_RELATIONSHIP = PREFERENCE_FILE + ".relationship";
+    public static final String PREFERENCE_IS_SELF = PREFERENCE_FILE + ".self";
+    public static final String PREFERENCE_LONGITUDE =  PREFERENCE_FILE + ".longitude";
+    public static final String PREFERENCE_LATITUDE = PREFERENCE_FILE + ".latitude";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

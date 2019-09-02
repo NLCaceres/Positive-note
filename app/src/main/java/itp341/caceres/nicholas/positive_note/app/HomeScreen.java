@@ -4,6 +4,8 @@ import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
@@ -19,17 +21,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.FirebaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
-import com.firebase.ui.auth.util.ExtraConstants;
 import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,7 +46,6 @@ import java.util.Map;
 public class HomeScreen extends AppCompatActivity {
 
     private TextView welcomeTextView;
-    private ArrayList<String> welcomeMessages;
     private TextView receivedPositiveNoteTV;
     private ArrayList<String> receivedPositiveNotes;
 
@@ -57,7 +55,7 @@ public class HomeScreen extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-    private String userName;
+    private String userDisplayName;
 
     public static final int RC_SIGN_IN = 0;
     public static String PACKAGE_NAME;
@@ -69,41 +67,54 @@ public class HomeScreen extends AppCompatActivity {
 
         PACKAGE_NAME = getApplicationContext().getPackageName();
 
-        // Initialize Firebase Auth
-        mFirebaseAuth = FirebaseAuth.getInstance();
-
+        // Init Views
+        welcomeTextView = (TextView) findViewById(R.id.welcomeMessageTextView);
+        receivedPositiveNoteTV = (TextView) findViewById(R.id.receivedPositiveNotes);
         homeToolbar = (Toolbar) findViewById(R.id.home_toolbar);
+        startChatButton = (Button) findViewById(R.id.startChatButton);
+
+        // Init Firebase Auth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+        // Setup Views
+        if (mFirebaseUser != null) {
+            if (userDisplayName == null) {
+                userDisplayName = mFirebaseUser.getDisplayName();
+            } // TODO: Considering alternate/randomized welcome messages, but currently drawing a blank as to what other messages could appear
+            welcomeTextView.setText(new StringBuilder().append(getResources().getString(R.string.welcome_init_user_message)).append(" ").append(userDisplayName).append("!"));
+        }
+
+        // Toolbar Setup
         setSupportActionBar(homeToolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
 
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference(); // No need to specify Firebase URL anymore, google-services.json handles it.
 
-        welcomeTextView = (TextView) findViewById(R.id.welcomeMessageTextView);
-        welcomeMessages = new ArrayList<>();
-        receivedPositiveNoteTV = (TextView) findViewById(R.id.receivedPositiveNotes);
+        // TODO: Set up a way for users to send each other positive notes, then arrange into list (listview? or random single note that appears?)
         receivedPositiveNotes = new ArrayList<>();
-        rootRef.child("receivedNotes").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                receivedPositiveNoteTV.setText(dataSnapshot.getValue(String.class));
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError firebaseError) {
-                Log.d("CANCEL TAG", "The data exchange was cancelled somehow");
-            }
-        });
-        rootRef.child("welcomeMessage").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                welcomeTextView.setText(dataSnapshot.getValue(String.class));
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError firebaseError) {
-                Log.d("CANCEL TAG", "The data exchange was cancelled somehow");
-            }
-        });
+//        rootRef.child("receivedNotes").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                receivedPositiveNoteTV.setText(dataSnapshot.getValue(String.class));
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError firebaseError) {
+//                Log.d("CANCEL TAG", "The data exchange was cancelled somehow");
+//            }
+//        });
+//        rootRef.child("welcomeMessage").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                welcomeTextView.setText(dataSnapshot.getValue(String.class));
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError firebaseError) {
+//                Log.d("CANCEL TAG", "The data exchange was cancelled somehow");
+//            }
+//        });
 
-        startChatButton = (Button) findViewById(R.id.startChatButton);
+        // Button Listener setup
         startChatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,8 +130,6 @@ public class HomeScreen extends AppCompatActivity {
 
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         if (mFirebaseUser == null) { // Not signed in, launch the Sign In activity
-
-            //startActivity(new Intent(this, UserProfileWithSettings.class));
 
             ActionCodeSettings actionCodeSettings = ActionCodeSettings.newBuilder()
                     .setAndroidPackageName(PACKAGE_NAME, true, null) // Package Name, Install redirect, min version of App
@@ -159,11 +168,17 @@ public class HomeScreen extends AppCompatActivity {
                 }
             } */
         } else {
-            userName = mFirebaseUser.getDisplayName();
-            // if (mFirebaseUser.getPhotoUrl() != null) {
-            // mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
-            // }
+            if (userDisplayName == null) { // This is actually called before onActivityResult! so update welcomeTextView!
+                userDisplayName = mFirebaseUser.getDisplayName();
+                welcomeTextView.setText(new StringBuilder().append(getResources().getString(R.string.welcome_back_user_message)).append(" ").append(userDisplayName).append("!"));
+            }
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        welcomeTextView.setText(new StringBuilder().append(getResources().getString(R.string.welcome_back_user_message)).append(" ").append(userDisplayName).append("!"));
     }
 
     @Override
@@ -174,7 +189,7 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() ==  R.id.action_profile) {
-            Intent i = new Intent(getApplicationContext(), UserProfileWithSettings.class);
+            Intent i = new Intent(getApplicationContext(), UserProfileActivity.class);
             startActivity(i);
             return true;
         } else {
@@ -191,25 +206,43 @@ public class HomeScreen extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) { // Successfully signed in
                 mFirebaseUser = mFirebaseAuth.getCurrentUser();
-                userName = mFirebaseUser.getDisplayName();
+                userDisplayName = mFirebaseUser.getDisplayName(); // Usually User's actual name
+                welcomeTextView.setText(new StringBuilder().append(getResources().getString(R.string.welcome_init_user_message)).append(" ").append(userDisplayName).append("!"));
                 final String userEmail = mFirebaseUser.getEmail();
-                final String userDocName = userEmail.substring(0, userEmail.indexOf("@"));
+                final String userName = userEmail.substring(0,1).toUpperCase() + userEmail.substring(1, userEmail.indexOf("@")); // Usually user email without the address
 
-                FirebaseFirestore dbRef = FirebaseFirestore.getInstance();
-                final DocumentReference userDocRef = dbRef.collection("users").document(userDocName);
+                final SharedPreferences.Editor prefEditor = getSharedPreferences(createAccount.PREFERENCE_FILE, MODE_PRIVATE).edit();
+                prefEditor.putString(createAccount.PREFERENCE_USER_DISPLAY_NAME, userDisplayName);
+                prefEditor.putString(createAccount.PREFERENCE_USER_EMAIL, userEmail);
+                prefEditor.putString(createAccount.PREFERENCE_USERNAME, userName);
+                prefEditor.apply();
+
+                // TODO: Add additional login screen to catch duplicates (JohnDoe@Gmail would match a JohnDoe@Aol.com Username so no good)
+
+                final DocumentReference userDocRef = FirebaseFirestore.getInstance().collection("users").document(userEmail);
                 userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                Log.d("Checking UserDoc", "User Doc Found. Don't update");
+                                Log.d("Login UserDoc Check", "User Doc Found. Don't update");
+                                prefEditor.putBoolean(createAccount.PREFERENCE_IS_PRIVATE, document.getBoolean("isPrivate"));
+                                prefEditor.putBoolean(createAccount.PREFERENCE_IS_HELPER, document.getBoolean("isHelper"));
+                                prefEditor.putBoolean(createAccount.PREFERENCE_IS_BLUE, document.getBoolean("currentFeelings.isBlue"));
+                                prefEditor.putBoolean(createAccount.PREFERENCE_IS_RELATIONSHIP, document.getBoolean("currentFeelings.isRelationship"));
+                                prefEditor.putBoolean(createAccount.PREFERENCE_IS_EMOTIONAL, document.getBoolean("currentFeelings.isEmotional"));
+                                prefEditor.putBoolean(createAccount.PREFERENCE_IS_LOOK, document.getBoolean("currentFeelings.isLooks"));
+                                prefEditor.putBoolean(createAccount.PREFERENCE_IS_SELF, document.getBoolean("currentFeelings.isSelf"));
+                                prefEditor.apply(); //Apply all
                             } else {
                                 Map<String, Object> newUser = new HashMap<>();
-                                newUser.put("fullName", userName);
-                                newUser.put("isVerified", mFirebaseUser.isEmailVerified());
+                                newUser.put("fullName", userDisplayName);
                                 newUser.put("email", userEmail);
-                                newUser.put("accountCreationDate", new Timestamp(new Date()));
+                                newUser.put("username", userName);
+                                newUser.put("isVerified", mFirebaseUser.isEmailVerified());
+                                setDBandPrefDefaults(newUser);
+
                                 userDocRef.set(newUser)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -220,8 +253,7 @@ public class HomeScreen extends AppCompatActivity {
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Log.d("User DB Upload Failed: ","Database upload of new user data didn't work!");
-                                                Log.w("User DB Upload Failed: ", "Failed with error: ", e);
+                                                Log.w("User DB Upload Failed: ", "DB Upload failed with error: ", e);
                                             }
                                         });
                             }
@@ -235,5 +267,29 @@ public class HomeScreen extends AppCompatActivity {
                 Log.w("Sign In Issue: ", "Issue logging, but returned from activity");
             }
         }
+    }
+
+    private void setDBandPrefDefaults(Map<String, Object> newUser) {
+        newUser.put("isPrivate", true);
+        newUser.put("isHelper", false);
+        newUser.put("accountCreationDate", new Timestamp(new Date()));
+
+        Map<String, Object> currentFeelings = new HashMap<>(); // Nested Data entry for set of user's feelings / feelings they can help with
+        currentFeelings.put("isBlue", false);
+        currentFeelings.put("isRelationship", false);
+        currentFeelings.put("isEmotional", false);
+        currentFeelings.put("isLooks", false);
+        currentFeelings.put("isSelf", false);
+        newUser.put("currentFeelings", currentFeelings);
+
+        SharedPreferences.Editor prefEditor = getSharedPreferences(createAccount.PREFERENCE_FILE, MODE_PRIVATE).edit();
+        prefEditor.putBoolean(createAccount.PREFERENCE_IS_PRIVATE, true);
+        prefEditor.putBoolean(createAccount.PREFERENCE_IS_HELPER, false);
+        prefEditor.putBoolean(createAccount.PREFERENCE_IS_BLUE, false);
+        prefEditor.putBoolean(createAccount.PREFERENCE_IS_RELATIONSHIP, false);
+        prefEditor.putBoolean(createAccount.PREFERENCE_IS_EMOTIONAL, false);
+        prefEditor.putBoolean(createAccount.PREFERENCE_IS_LOOK, false);
+        prefEditor.putBoolean(createAccount.PREFERENCE_IS_SELF, false);
+        prefEditor.apply();
     }
 }

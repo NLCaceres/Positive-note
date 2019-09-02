@@ -21,7 +21,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/newUserNameET"
-        android:hint="@string/username_hint_2"
+        android:hint="@string/username_hint"
         android:layout_gravity="center" />
 
     <EditText
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/newPasswordET"
         android:hint="@string/password_hint"
-        android:password="true"
+        android:inputType="textPassword"
         android:layout_gravity="center" />
 
     <TextView
@@ -125,7 +125,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/newUserBioEditText"
         android:layout_gravity="center"
-        android:hint="@string/user_bio"/>
+        android:hint="@string/user_bio_prompt"/>
 
     <Button
         android:layout_width="wrap_content"

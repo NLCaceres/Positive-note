@@ -1,7 +1,7 @@
 package itp341.caceres.nicholas.positive_note.app;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class UserProfileWithSettings extends AppCompatActivity {
+public class UserProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
@@ -25,7 +25,7 @@ public class UserProfileWithSettings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile_with_settings);
+        setContentView(R.layout.activity_user_profile);
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
@@ -63,7 +63,7 @@ public class UserProfileWithSettings extends AppCompatActivity {
             }
         }
 
-        profileToolbar = (Toolbar) findViewById(R.id.profile_toolbar);
+        profileToolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(profileToolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
     }
@@ -77,7 +77,7 @@ public class UserProfileWithSettings extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings: {
-                Intent i = new Intent(getApplicationContext(), settingsActivity.class);
+                Intent i = new Intent(getApplicationContext(), UserSettingsActivity.class);
                 startActivityForResult(i, 1);
                 Log.d("Settings", "Activity will come up now");
                 return true;

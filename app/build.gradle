@@ -4,9 +4,9 @@ android {
     signingConfigs {
         release {
             storeFile file('/Users/NCaceres/.android/release.keystore')
-            storePassword '9Miv12JL3Zcw9'
+            storePassword 'p@9yxzYrptJvrVv'
+            keyPassword 'XDgjsi@37SnAd8k'
             keyAlias = 'release'
-            keyPassword '9Miv12JL3Zcw9'
         }
     }
     compileSdkVersion 29
@@ -28,6 +28,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable = true
+            signingConfig signingConfigs.release
+        }
+        debug {
             signingConfig signingConfigs.release
         }
     }

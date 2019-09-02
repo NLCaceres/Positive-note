@@ -56,7 +56,7 @@ public class InMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_message);
 
-        messageToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        messageToolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(messageToolbar);
         Intent i = getIntent();
         final String userNameTitle = i.getStringExtra(EXTRA_RECEIVER);

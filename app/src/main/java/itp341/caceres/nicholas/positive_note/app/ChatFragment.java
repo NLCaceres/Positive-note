@@ -2,6 +2,7 @@ package itp341.caceres.nicholas.positive_note.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
@@ -29,6 +35,8 @@ public class ChatFragment extends Fragment {
     private ChatAdapter chatAdapter;
 
     private UserSingleton userBase;
+
+    private FusedLocationProviderClient fusedLocationClient;
 
     private Button findUsers;
 
@@ -49,6 +57,19 @@ public class ChatFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_chat, container, false);
 
         userBase = UserSingleton.getInstance();
+
+        if (checkPlayServices()) { // Make sure user is good to use Play Services
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+            fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null) { // It IS possible for it to be null so careful!
+                        double userLatitude = location.getLatitude();
+                        double userLongitude = location.getLongitude();
+                    }
+                }
+            });
+        }
 
         chatMessagesList = (ListView) v.findViewById(R.id.chatListView);
         chatAdapter = new ChatAdapter(getContext(), userBase.getUsers());
@@ -74,6 +95,19 @@ public class ChatFragment extends Fragment {
         });
 
         return v;
+    }
+
+    private boolean checkPlayServices() {
+        GoogleApiAvailability googlePlayCheck = GoogleApiAvailability.getInstance();
+
+        int checkResult = googlePlayCheck.isGooglePlayServicesAvailable(getContext());
+        if(checkResult != ConnectionResult.SUCCESS) {
+            if(googlePlayCheck.isUserResolvableError(checkResult)) {
+                googlePlayCheck.getErrorDialog(getActivity(), checkResult, 9000).show(); // PLAY_SERVICES_RESOLUTION_REQUEST = 9000 apparently?
+            }
+            return false;
+        }
+        return true;
     }
 
     public class ChatAdapter extends ArrayAdapter<UserProfile> {

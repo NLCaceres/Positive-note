@@ -3,7 +3,6 @@ package itp341.caceres.nicholas.positive_note.app;
 import android.content.Intent;
 import com.google.android.material.tabs.TabLayout;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -24,7 +23,7 @@ public class ChatWithTabs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_with_tabs);
 
-        tabsToolbar = (Toolbar) findViewById(R.id.tabs_toolbar);
+        tabsToolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(tabsToolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
 
@@ -117,7 +116,7 @@ public class ChatWithTabs extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_profile:
-                Intent i = new Intent(getApplicationContext(), UserProfileWithSettings.class);
+                Intent i = new Intent(getApplicationContext(), UserProfileActivity.class);
                 startActivity(i);
                 return true;
             default: {

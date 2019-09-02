@@ -20,11 +20,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".ChatWithTabs" />
-        <activity android:name=".UserProfileWithSettings" />
+        <activity android:name=".UserProfileActivity" />
         <activity android:name=".InMessageActivity"
                   android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".findUsers" />
-        <activity android:name=".settingsActivity" />
+        <activity android:name=".UserSettingsActivity" />
         <activity android:name=".createAccount" />
     </application>
 
