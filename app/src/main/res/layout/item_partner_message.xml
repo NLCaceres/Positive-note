@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+
+  <ImageView
+      android:id="@+id/partnerImageView"
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:contentDescription="Chat Partner Profile Picture"
+      android:src="@drawable/ic_account_circle_fuchsia_72dp"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/partnerMessageTextView" />
+
+  <TextView
+      android:id="@+id/partnerMessageTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:maxWidth="300dp"
+      android:background="@drawable/chat_partner_message_background"
+      android:paddingStart="7dp"
+      android:paddingTop="7dp"
+      android:paddingEnd="10dp"
+      android:paddingBottom="7dp"
+      android:text="Hi"
+      android:textColor="#000000"
+      android:textSize="20sp"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/partnerTimeTextView"
+      app:layout_constraintStart_toEndOf="@+id/partnerImageView"
+      app:layout_constraintEnd_toStartOf="@+id/heartedMessageImageView"/>
+
+  <ImageView
+      android:id="@+id/heartedMessageImageView"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:contentDescription="Favorited Message Button"
+      android:src="@drawable/ic_favorite_fuchsia_72dp"
+      android:visibility="invisible"
+      app:layout_constraintStart_toEndOf="@+id/partnerMessageTextView"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <TextView
+      android:id="@+id/partnerTimeTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="12:45pm"
+      android:textColor="#99000000"
+      android:textSize="12sp"
+      android:visibility="invisible"
+      app:layout_constraintTop_toBottomOf="@+id/partnerMessageTextView"
+      app:layout_constraintStart_toStartOf="@+id/partnerMessageTextView"
+      app:layout_constraintEnd_toEndOf="@+id/partnerMessageTextView"
+      app:layout_constraintHorizontal_bias="0.05"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

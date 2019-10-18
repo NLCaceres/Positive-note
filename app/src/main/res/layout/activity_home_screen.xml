@@ -1,115 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#CBFF8C"
     android:orientation="vertical"
-    tools:context="itp341.caceres.nicholas.positive_note.app.HomeScreen"
-    android:background="#CBFF8C">
+    tools:context="itp341.caceres.nicholas.positive_note.app.HomeActivity">
 
-    <include layout="@layout/app_toolbar" />
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:id="@+id/home_toolbar"-->
-<!--        android:background="#00CCAA"-->
-<!--        android:elevation="6dp"-->
-<!--        android:theme="@style/ToolBarStyle"-->
-<!--        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-<!--        app:titleTextAppearance="@style/Toolbar.TitleText">-->
-<!--    </androidx.appcompat.widget.Toolbar>-->
+  <include layout="@layout/app_toolbar" />
 
-    <LinearLayout
+  <!-- Constraint Layouts survive XML rearrangement -->
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:paddingTop="15dp"
+      android:paddingBottom="15dp">
+
+    <Button
+        android:id="@+id/startChatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/button_background"
+        android:minWidth="200dp"
+        android:text="@string/start_chat_button"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+      <include layout="@layout/app_progressbar" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:id="@+id/appNameTextView"-->
-<!--                android:text="@string/app_name"-->
-<!--                android:textSize="40dp"-->
-<!--                android:textColor="#000000"-->
-<!--                android:textStyle="bold"-->
-<!--                android:layout_gravity="center_horizontal"/>-->
+    </RelativeLayout>
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+    <TextView
+        android:id="@+id/recentNotesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recent_notes_label"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/positiveNoteViewPager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeMessageTextView" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/welcomeMessageTextView"
-                android:text="@string/welcome_init_message"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:textSize="26sp"
-                android:lineSpacingExtra="10dp"
-                android:gravity="center"
-                android:minLines="1"
-                android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/welcomeMessageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:lineSpacingExtra="10dp"
+        android:minLines="1"
+        android:text="@string/welcome_init_message"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/recentNotesLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/positiveNoteViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/startChatButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recentNotesLabel" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/recentNotesLabel"
-            android:text="@string/recent_notes_label"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/receivedPositiveNotes"
-                android:textColor="#000000"
-                android:textSize="22sp"
-                android:minLines="1"
-                android:layout_gravity="center_horizontal"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp">
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/startChatButton"
-                android:text="@string/start_chat_button"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#00DDAA"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

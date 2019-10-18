@@ -10,20 +10,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class RootFragment extends Fragment {
+public class RootFragment extends Fragment { // RootFragment exists to hold either TherapyFrag (for it's webView) or a EducationFrag (for listview of links)
 
-    public static RootFragment newInstance() {
-        RootFragment rootFrag = new RootFragment();
-        return rootFrag;
-    }
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.root_fragment, container, false);
+  public static RootFragment newInstance() {
+    RootFragment rootFrag = new RootFragment();
+    return rootFrag;
+  }
 
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.root_frame, EducationFragment.newInstance(null)).commit(); // Fill on creation and commit
+  @Nullable
+  @Override
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.root_fragment, container, false);
 
-        return view;
-    }
+    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+    transaction.replace(R.id.root_frame, EducationFragment.newInstance(null)).commit(); // Fill on creation and commit
+
+    return view;
+  }
 }

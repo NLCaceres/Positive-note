@@ -1,68 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CBFF8C">
+    android:background="#CBFF8C"
+    android:orientation="vertical">
 
-    <!--<androidx.appcompat.widget.Toolbar-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:id="@+id/profile_toolbar"-->
-        <!--android:background="#00CCAA"-->
-        <!--android:elevation="6dp"-->
-        <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
-        <!--android:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
-    <!--</androidx.appcompat.widget.Toolbar>-->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:padding="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/userNameEditText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:minWidth="300dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/userNameEditText"
-            android:hint="@string/username_hint"
-            android:layout_gravity="center"
-            android:layout_marginTop="130dp"/>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:minWidth="300dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/passwordEditText"
-            android:hint="@string/password_hint"
-            android:password="true"
-            android:layout_gravity="center"/>
-
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="205dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/loginButton"
-        android:text="@string/login_button"
         android:layout_gravity="center"
-        android:backgroundTint="#88CCF1"/>
+        android:layout_marginTop="130dp"
+        android:hint="@string/username_hint"
+        android:minWidth="300dp" />
 
-    <Button
-        android:layout_width="205dp"
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/forgotPassButton"
-        android:text="@string/forgot_pass_button"
         android:layout_gravity="center"
-        android:backgroundTint="#88CCF1"/>
+        android:hint="@string/password_hint"
+        android:minWidth="300dp"
+        android:inputType="textPassword" />
 
-    <Button
-        android:layout_width="205dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/createNewButton"
-        android:text="@string/create_new_button"
-        android:layout_gravity="center"
-        android:backgroundTint="#88CCF1"/>
+
+  </LinearLayout>
+
+  <Button
+      android:id="@+id/loginButton"
+      android:layout_width="205dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:backgroundTint="@color/appColorPrimary"
+      android:text="@string/login_button"
+      android:textColor="@android:color/white"/>
+
+  <Button
+      android:id="@+id/createNewButton"
+      android:layout_width="205dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:backgroundTint="@color/appColorPrimary"
+      android:text="@string/create_new_button"
+      android:textColor="@android:color/white"/>
+
+  <Button
+      android:id="@+id/forgotPassButton"
+      android:layout_width="205dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:backgroundTint="@color/appColorPrimary"
+      android:text="@string/forgot_pass_button"
+      android:textColor="@android:color/white"/>
 
 </LinearLayout>

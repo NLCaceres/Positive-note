@@ -3,52 +3,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CBFF8C"
     android:orientation="vertical"
-    tools:context="itp341.caceres.nicholas.positive_note.app.findUsers"
-    android:background="#CBFF8C">
+    tools:context="itp341.caceres.nicholas.positive_note.app.FindUsersActivity">
 
-    <include layout="@layout/app_toolbar" />
-    <!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:id="@+id/tabs_toolbar"-->
-<!--        android:background="#00CCAA"-->
-<!--        android:elevation="4dp"-->
-<!--        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
-<!--        android:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
-<!--    </androidx.appcompat.widget.Toolbar>-->
+  <include layout="@layout/app_toolbar" />
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:paddingStart="15dp"
+          android:paddingTop="15dp"
+          android:paddingEnd="15dp"
+          android:paddingBottom="10dp">
 
         <TextView
+            android:id="@+id/rankingsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rankingsTextView"
             android:text="@string/find_users"
+            android:textColor="@android:color/black"
             android:textSize="22sp"
-            android:textColor="#000000"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <Button
+            android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/addButton"
+            android:layout_marginStart="30dp"
+            android:backgroundTint="@color/button_background"
             android:text="@string/update_button"
-            android:layout_marginStart="50dp"
-            android:backgroundTint="#88CCF1"/>
+            android:textColor="@android:color/white"/>
+
+      </LinearLayout>
+
+      <ListView
+          android:id="@+id/helperListView"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginTop="10dp">
+
+      </ListView>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_marginStart="15dp"
+          android:layout_marginEnd="15dp"
+          android:background="#000000" />
 
     </LinearLayout>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/helperListView">
+    <include layout="@layout/app_progressbar" />
 
-
-    </ListView>
+  </RelativeLayout>
 
 </LinearLayout>

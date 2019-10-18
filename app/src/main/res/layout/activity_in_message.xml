@@ -3,46 +3,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="itp341.caceres.nicholas.positive_note.app.InMessageActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#CBFF8C"
     android:orientation="vertical"
-    android:background="#CBFF8C">
+    tools:context="itp341.caceres.nicholas.positive_note.app.InMessageActivity">
 
-    <include layout="@layout/app_toolbar" />
-    <!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:id="@+id/my_toolbar"-->
-<!--        android:background="#00CCAA"-->
-<!--        android:elevation="6dp"-->
-<!--        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
-<!--        android:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
-<!--    </androidx.appcompat.widget.Toolbar>-->
+  <include layout="@layout/app_toolbar" />
 
-    <ListView
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:paddingBottom="10dp">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:id="@+id/messageListView">
+        android:layout_height="match_parent">
 
-    </ListView>
+      <include layout="@layout/app_progressbar" />
 
-    <LinearLayout
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messageRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="bottom">
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/messageInputEditText" />
 
-        <EditText
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/messageInputEditText"
-            android:hint="@string/message_hint" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/message_edit_text_background"
+        android:backgroundTint="#F0D89B"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/messageRecyclerView"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:id="@+id/sendMessageButton"/>
+    <EditText
+        android:id="@+id/messageInputEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:background="@android:color/transparent"
+        android:hint="@string/message_hint"
+        android:inputType="textMultiLine"
+        android:maxLines="4"
+        android:importantForAutofill="no"
+        android:layout_marginStart="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sendMessageButton"/>
 
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/sendMessageButton"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_send_fuchsia_96dp"
+        android:contentDescription="@string/send_button_image_desc"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/messageInputEditText"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

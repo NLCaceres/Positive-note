@@ -2,30 +2,48 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="itp341.caceres.nicholas.positive_note.app">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <application
+      android:allowBackup="true"
+      android:icon="@mipmap/ic_launcher"
+      android:label="@string/app_name"
+      android:supportsRtl="true"
+      android:theme="@style/AppTheme"> <!-- Supports Right-to-left formats (supportRtl) -->
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+    <!--Package name from manifest attr is appended to activity android:name-->
+    <activity
+        android:name=".HomeActivity"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <!--Package name from manifest attr is appended to activity android:name-->
-        <activity android:name=".HomeScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ChatWithTabs" />
-        <activity android:name=".UserProfileActivity" />
-        <activity android:name=".InMessageActivity"
-                  android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".findUsers" />
-        <activity android:name=".UserSettingsActivity" />
-        <activity android:name=".createAccount" />
-    </application>
+        android:launchMode="singleTop">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <action android:name="android.intent.action.VIEW" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
+        android:name=".TabsActivity"
+        android:label="@string/app_name"
+        android:launchMode="singleTop"
+        android:parentActivityName=".HomeActivity"/>
+    <activity
+        android:name=".UserProfileActivity"
+        android:label="@string/app_name" />
+    <activity
+        android:name=".InMessageActivity"
+        android:label="@string/app_name"
+        android:parentActivityName=".TabsActivity"
+        android:windowSoftInputMode="adjustResize|stateHidden" /> <!-- Affects EditText - shifting UI -->
+    <activity
+        android:name=".FindUsersActivity"
+        android:label="@string/app_name"
+        android:parentActivityName=".TabsActivity"/>
+    <activity android:name=".UserSettingsActivity" />
+    <activity android:name=".CreateAccountActivity" />
+  </application>
+
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+  <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

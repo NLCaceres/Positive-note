@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "31032635395-v234j66k1prn44lu4i7587gosuglu2cb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "itp341.caceres.nicholas.positive_note.app",
+            "certificate_hash": "b0102f8c282d3885c9d8d94b823112d21f2190ac"
+          }
+        },
+        {
+          "client_id": "31032635395-1mms2btdgif1m3sjrpbm1qsd8n16ipp6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "itp341.caceres.nicholas.positive_note.app",
+            "certificate_hash": "92c9851d7c699d5e719fb8001ac13bec21468658"
+          }
+        },
+        {
           "client_id": "31032635395-at9aamo44vpiaojvtv088hv4l305d4be.apps.googleusercontent.com",
           "client_type": 3
         }
