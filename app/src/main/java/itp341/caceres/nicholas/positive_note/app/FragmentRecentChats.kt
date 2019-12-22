@@ -25,7 +25,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import java.util.*
 
-class ChatListFragment : Fragment(), CoroutineScope by MainScope() { // Delegation recommended for CoroutineScope
+class FragmentRecentChats : Fragment(), CoroutineScope by MainScope() { // Delegation recommended for CoroutineScope
 
 //  override val coroutineContext: CoroutineContext
 //    get() = Dispatchers.IO + job
@@ -71,7 +71,7 @@ class ChatListFragment : Fragment(), CoroutineScope by MainScope() { // Delegati
 
     findUsersButton = view.findUsersButton.apply {
       setOnClickListener {
-        val intent = Intent(context, FindUsersActivity::class.java)
+        val intent = Intent(context, ActivityFindUsers::class.java)
         val user = activity?.intent?.getParcelableExtra<UserInfo>(INTENT_EXTRAS_PARCEABLE_USER_INFO)
         intent.putExtra(INTENT_EXTRAS_PARCEABLE_USER_INFO, user)
         startActivity(intent)
@@ -90,7 +90,7 @@ class ChatListFragment : Fragment(), CoroutineScope by MainScope() { // Delegati
     recentChatMessagesAdapter = RecentMessagesAdapter(userChatItems, object : RecentMessagesAdapter.UserChatItemClickListener {
       // Passing in the view enables smooth fancy transition if using AppCompatActivity.makeSceneTransitionAnimation - Otherwise unnecessary
       override fun onUserChatClick(view: View, userChatItem: UserChatItem) {
-        val intent = Intent(context, InMessageActivity::class.java)
+        val intent = Intent(context, ActivityChatMessages::class.java)
         intent.putExtra(INTENT_EXTRAS_PARCEABLE_CHAT_PARTNER_INFO, userChatItem.user)
         intent.putExtra(INTENT_EXTRAS_PARCEABLE_USER_INFO, mUserInfo)
         intent.putExtra(INTENT_EXTRAS_CHAT_EXISTS, true)
@@ -218,8 +218,8 @@ class ChatListFragment : Fragment(), CoroutineScope by MainScope() { // Delegati
 
   companion object {
     @JvmStatic
-    fun newInstance(): ChatListFragment {
-      return ChatListFragment()
+    fun newInstance(): FragmentRecentChats {
+      return FragmentRecentChats()
     }
   }
 }

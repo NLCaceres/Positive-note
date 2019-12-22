@@ -6,10 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,12 +23,12 @@ import itp341.caceres.nicholas.positive_note.app.modelClasses.UserMessage;
 
 // RecyclerView Selector instructions at the bottom
 
-public class UserMessagesRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterChatMessagesRV extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   private ArrayList<UserMessage> usersMessages;
   private String currentUserFullName;
   private SelectionTracker<String> selectionTracker; // Always include what type of key it uses (otherwise unchecked call is unsafe)
 
-  UserMessagesRVAdapter(ArrayList<UserMessage> usersMessages, String userFullName) {
+  AdapterChatMessagesRV(ArrayList<UserMessage> usersMessages, String userFullName) {
     this.usersMessages = usersMessages;
     currentUserFullName = userFullName;
   }
@@ -54,7 +52,7 @@ public class UserMessagesRVAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     final void bind(UserMessage message) { // Add listener and even active for itemView
       viewHolderID = message.getTimeStamp().toString();
       messageTextView.setText(message.getMessage());
-      timeTextView.setText(RecentUserChatsRVAdapterKt.setTimeTextView(message.getTimeStamp()));
+      timeTextView.setText(AdapterRecentUserChatsRVKt.setTimeTextView(message.getTimeStamp()));
       messageTextView.setOnClickListener(view -> {
         if (timeTextView.getVisibility() == View.INVISIBLE) {
           timeTextView.setAlpha(0f);
@@ -95,7 +93,7 @@ public class UserMessagesRVAdapter extends RecyclerView.Adapter<RecyclerView.Vie
       viewHolderID = message.getTimeStamp().toString(); // Java Date toString returns Day Month Day# HH:MM:SS TimeZone YYYY
       messageTextView.setText(message.getMessage());
       messageTextView.setOnClickListener(this);
-      timeTextView.setText(RecentUserChatsRVAdapterKt.setTimeTextView(message.getTimeStamp()));
+      timeTextView.setText(AdapterRecentUserChatsRVKt.setTimeTextView(message.getTimeStamp()));
       heartImageView.setVisibility(!message.getFavorited() ? View.INVISIBLE : View.VISIBLE);
       heartImageView.setOnClickListener(this);
     }

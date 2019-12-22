@@ -58,7 +58,7 @@ import itp341.caceres.nicholas.positive_note.app.constants.ConstantsKt;
 import itp341.caceres.nicholas.positive_note.app.modelClasses.UserMessage;
 import itp341.caceres.nicholas.positive_note.app.modelClasses.UserInfo;
 
-public class HomeActivity extends AppCompatActivity {
+public class ActivityHome extends AppCompatActivity {
 
   public static final int RC_SIGN_IN = 0;
   public static final int LOCATION_REQUEST_CODE = 101;
@@ -128,7 +128,7 @@ public class HomeActivity extends AppCompatActivity {
 
     // Button Listener setup
     startChatButton.setOnClickListener(v -> {
-      Intent i = new Intent(getApplicationContext(), TabsActivity.class);
+      Intent i = new Intent(getApplicationContext(), ActivityTabs.class);
       if (mUserInfo != null) {
         i.putExtra(ConstantsKt.INTENT_EXTRAS_PARCEABLE_USER_INFO, mUserInfo);
       }
@@ -185,7 +185,7 @@ public class HomeActivity extends AppCompatActivity {
   @Override
   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
     if (item.getItemId() == R.id.action_profile) {
-      Intent i = new Intent(getApplicationContext(), UserProfileActivity.class);
+      Intent i = new Intent(getApplicationContext(), ActivityUserProfile.class);
       if (mUserInfo != null) {
         i.putExtra(ConstantsKt.INTENT_EXTRAS_PARCEABLE_USER_INFO, mUserInfo);
       }
@@ -284,7 +284,7 @@ public class HomeActivity extends AppCompatActivity {
         AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
-            .setTheme(R.style.AppTheme)
+            .setTheme(R.style.LoginTheme)
             .build(),
         RC_SIGN_IN);
 
@@ -373,8 +373,8 @@ public class HomeActivity extends AppCompatActivity {
     try {
       String userCity = geocoder.getFromLocation(userLocation.getLatitude(), userLocation.getLongitude(), 1).get(0).getLocality();
       String locationHash = GeoHashExtensions.encode(userLocation.getLatitude(), userLocation.getLongitude()).substring(0, 3);
-      double userLat = FindUsersActivity.formatLocationData(userLocation.getLatitude());
-      double userLong = FindUsersActivity.formatLocationData(userLocation.getLongitude());
+      double userLat = ActivityFindUsers.formatLocationData(userLocation.getLatitude());
+      double userLong = ActivityFindUsers.formatLocationData(userLocation.getLongitude());
 
       SharedPreferences.Editor prefEditor = getSharedPreferences(ConstantsKt.PREFERENCE_FILE, MODE_PRIVATE).edit();
       prefEditor.putString("userCity", userCity);
@@ -413,7 +413,7 @@ public class HomeActivity extends AppCompatActivity {
   private class AutoSliderPagerAdapter extends FragmentStateAdapter {
     AutoSliderPagerAdapter(@NonNull FragmentActivity fragmentActivity) { super(fragmentActivity); }
 
-    @NonNull @Override public Fragment createFragment(int position) { return AutoSlideFragment.newInstance(positiveNotesList.get(position)); }
+    @NonNull @Override public Fragment createFragment(int position) { return FragmentAutoSlide.newInstance(positiveNotesList.get(position)); }
 
     @Override public int getItemCount() { return positiveNotesList.size(); }
   }

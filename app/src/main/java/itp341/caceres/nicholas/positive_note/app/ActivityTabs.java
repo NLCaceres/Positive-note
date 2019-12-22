@@ -20,7 +20,7 @@ import com.google.android.material.tabs.TabLayout;
 import itp341.caceres.nicholas.positive_note.app.constants.ConstantsKt;
 import itp341.caceres.nicholas.positive_note.app.modelClasses.UserInfo;
 
-public class TabsActivity extends AppCompatActivity {
+public class ActivityTabs extends AppCompatActivity {
 
   Toolbar homeToolbar;
   private ViewPager tabsViewPager;
@@ -65,16 +65,16 @@ public class TabsActivity extends AppCompatActivity {
 //        chatListFrag.getMSelectionTracker().clearSelection();
 //      }
     } else if (tabsViewPager.getCurrentItem() == 1) {
-      TherapyFragment webViewFrag = (TherapyFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + tabsViewPager.getCurrentItem());
+      FragmentTherapy webViewFrag = (FragmentTherapy) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + tabsViewPager.getCurrentItem());
       if (webViewFrag.getWebView().copyBackForwardList().getCurrentIndex() > 0) {
         webViewFrag.getWebView().goBack();
         return;
       }
     } else if (tabsViewPager.getCurrentItem() == 2) { // Works differently than normal due to "nested" fragments
-      //RootFragment rootParentFrag = (RootFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + tabsViewPager.getCurrentItem());
-      //TherapyFragment webViewFrag = (TherapyFragment) getSupportFragmentManager().findFragmentById(R.id.root_frame);
-      if (getSupportFragmentManager().findFragmentById(R.id.root_frame) instanceof TherapyFragment) {
-        TherapyFragment webViewFrag = (TherapyFragment) getSupportFragmentManager().findFragmentById(R.id.root_frame);
+      //FragmentRoot rootParentFrag = (FragmentRoot) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + tabsViewPager.getCurrentItem());
+      //FragmentTherapy webViewFrag = (FragmentTherapy) getSupportFragmentManager().findFragmentById(R.id.root_frame);
+      if (getSupportFragmentManager().findFragmentById(R.id.root_frame) instanceof FragmentTherapy) {
+        FragmentTherapy webViewFrag = (FragmentTherapy) getSupportFragmentManager().findFragmentById(R.id.root_frame);
         if (webViewFrag.getWebView().copyBackForwardList().getCurrentIndex() > 0) {
           webViewFrag.getWebView().goBack();
           return;
@@ -87,7 +87,7 @@ public class TabsActivity extends AppCompatActivity {
   @Override
   public boolean dispatchKeyEvent(KeyEvent event) {
     if (tabsViewPager.getCurrentItem() == 0) {
-      ChatListFragment chatListFrag = (ChatListFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + tabsViewPager.getCurrentItem());
+      FragmentRecentChats chatListFrag = (FragmentRecentChats) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + tabsViewPager.getCurrentItem());
       if (chatListFrag.getActionMode() != null && event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
         if (chatListFrag.getMSelectionTracker().getSelection().size() > 1) {
           Log.d("Back Button ActionMode", "Selection tracker size is bigger than 1");
@@ -108,7 +108,7 @@ public class TabsActivity extends AppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.action_profile:
-        Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ActivityUserProfile.class);
         UserInfo userInfo = getIntent().getParcelableExtra(ConstantsKt.INTENT_EXTRAS_PARCEABLE_USER_INFO);
         if (userInfo != null) {
           intent.putExtra(ConstantsKt.INTENT_EXTRAS_PARCEABLE_USER_INFO, userInfo);
@@ -131,11 +131,11 @@ public class TabsActivity extends AppCompatActivity {
     public @NonNull
     Fragment getItem(int position) {
       if (position == 0) {
-        return ChatListFragment.newInstance();
+        return FragmentRecentChats.newInstance();
       } else if (position == 1) {
-        return TherapyFragment.newInstance(null);
+        return FragmentTherapy.newInstance(null);
       } else {
-        return RootFragment.newInstance();
+        return FragmentRoot.newInstance();
       }
     }
 

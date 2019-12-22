@@ -11,7 +11,7 @@
 
     <!--Package name from manifest attr is appended to activity android:name-->
     <activity
-        android:name=".HomeActivity"
+        android:name=".ActivityHome"
         android:label="@string/app_name"
         android:launchMode="singleTop">
       <intent-filter>
@@ -22,24 +22,24 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".TabsActivity"
+        android:name=".ActivityTabs"
         android:label="@string/app_name"
         android:launchMode="singleTop"
-        android:parentActivityName=".HomeActivity"/>
+        android:parentActivityName=".ActivityHome"/>
     <activity
-        android:name=".UserProfileActivity"
+        android:name=".ActivityUserProfile"
         android:label="@string/app_name" />
     <activity
-        android:name=".InMessageActivity"
+        android:name=".ActivityChatMessages"
         android:label="@string/app_name"
-        android:parentActivityName=".TabsActivity"
+        android:parentActivityName=".ActivityTabs"
         android:windowSoftInputMode="adjustResize|stateHidden" /> <!-- Affects EditText - shifting UI -->
     <activity
-        android:name=".FindUsersActivity"
+        android:name=".ActivityFindUsers"
         android:label="@string/app_name"
-        android:parentActivityName=".TabsActivity"/>
-    <activity android:name=".UserSettingsActivity" />
-    <activity android:name=".CreateAccountActivity" />
+        android:parentActivityName=".ActivityTabs"/>
+    <activity android:name=".ActivityUserSettings" />
+    <activity android:name=".ActivityCreateAccount" />
   </application>
 
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />

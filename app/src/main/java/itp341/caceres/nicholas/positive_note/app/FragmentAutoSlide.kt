@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_auto_slider_page.view.*
 import kotlin.random.Random
 
 // FragmentInteractionListener may be used to handle interaction events
-class AutoSlideFragment : Fragment() {
+class FragmentAutoSlide : Fragment() {
   private var pagerMessageTextView: TextView? = null // Must be init-ed on creation!
   private var pagerUserTextView: TextView? = null
 
@@ -51,8 +51,8 @@ class AutoSlideFragment : Fragment() {
 
   companion object {
     @JvmStatic
-    fun newInstance(messageInside: UserMessage): AutoSlideFragment {
-      val autoSlideFrag = AutoSlideFragment()
+    fun newInstance(messageInside: UserMessage): FragmentAutoSlide {
+      val autoSlideFrag = FragmentAutoSlide()
       val args = Bundle()
       args.putParcelable("message", messageInside)
       autoSlideFrag.arguments = args

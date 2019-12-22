@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#CBFF8C"
     android:orientation="vertical"
-    tools:context="itp341.caceres.nicholas.positive_note.app.InMessageActivity">
+    tools:context="itp341.caceres.nicholas.positive_note.app.ActivityChatMessages">
 
   <include layout="@layout/app_toolbar" />
 

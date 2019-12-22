@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#CBFF8C"
     android:orientation="vertical"
-    tools:context="itp341.caceres.nicholas.positive_note.app.FindUsersActivity">
+    tools:context="itp341.caceres.nicholas.positive_note.app.ActivityFindUsers">
 
   <include layout="@layout/app_toolbar" />
 

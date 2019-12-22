@@ -47,7 +47,7 @@ import de.alpharogroup.jgeohash.GeoHashExtensions;
 import itp341.caceres.nicholas.positive_note.app.constants.ConstantsKt;
 import itp341.caceres.nicholas.positive_note.app.modelClasses.UserInfo;
 
-public class FindUsersActivity extends AppCompatActivity {
+public class ActivityFindUsers extends AppCompatActivity {
 
 
   private Double userLat;
@@ -125,9 +125,9 @@ public class FindUsersActivity extends AppCompatActivity {
 
     Bundle bundle = getIntent().getExtras();
 
-    userLat = bundle.getDouble(HomeActivity.BUNDLE_USER_LAT);
-    userLong = bundle.getDouble(HomeActivity.BUNDLE_USER_LONG);
-    userHash = bundle.getString(HomeActivity.BUNDLE_USER_HASH);
+    userLat = bundle.getDouble(ActivityHome.BUNDLE_USER_LAT);
+    userLong = bundle.getDouble(ActivityHome.BUNDLE_USER_LONG);
+    userHash = bundle.getString(ActivityHome.BUNDLE_USER_HASH);
 
     SharedPreferences prefs = getSharedPreferences(ConstantsKt.PREFERENCE_FILE, MODE_PRIVATE);
     if (userHash == null) {
@@ -141,7 +141,7 @@ public class FindUsersActivity extends AppCompatActivity {
       }
     }
 
-    userName = bundle.getString(HomeActivity.BUNDLE_USER_NAME);
+    userName = bundle.getString(ActivityHome.BUNDLE_USER_NAME);
     if (userName == null) {
       userName = prefs.getString(ConstantsKt.PREFERENCE_USERNAME, mFirebaseUser.getEmail().substring(0, mFirebaseUser.getEmail().indexOf("@")));
     }
@@ -162,7 +162,7 @@ public class FindUsersActivity extends AppCompatActivity {
   private void fetchUserLocation() {
     if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
       ActivityCompat.requestPermissions(this, new String[]
-          {Manifest.permission.ACCESS_COARSE_LOCATION}, HomeActivity.LOCATION_REQUEST_CODE);
+          {Manifest.permission.ACCESS_COARSE_LOCATION}, ActivityHome.LOCATION_REQUEST_CODE);
       return;
     }
     /* getLastLocation will only get last observed location (so in emulator googleMaps is only source of location coordinates
@@ -262,7 +262,7 @@ public class FindUsersActivity extends AppCompatActivity {
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
       UserInfo user = (UserInfo) adapterView.getItemAtPosition(position);
-      Intent i = new Intent(getApplicationContext(), InMessageActivity.class);
+      Intent i = new Intent(getApplicationContext(), ActivityChatMessages.class);
       i.putExtra(ConstantsKt.INTENT_EXTRAS_PARCEABLE_USER_INFO, fullUser);
       i.putExtra(ConstantsKt.INTENT_EXTRAS_PARCEABLE_CHAT_PARTNER_INFO, user);
       startActivity(i);

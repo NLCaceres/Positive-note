@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import itp341.caceres.nicholas.positive_note.app.constants.ConstantsKt;
 import itp341.caceres.nicholas.positive_note.app.modelClasses.UserProfile;
 
-public class CreateAccountActivity extends AppCompatActivity {
+public class ActivityCreateAccount extends AppCompatActivity {
 
   private Toolbar createAccountToolbar;
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#CBFF8C"
     android:orientation="vertical"
-    tools:context="itp341.caceres.nicholas.positive_note.app.HomeActivity">
+    tools:context="itp341.caceres.nicholas.positive_note.app.ActivityHome">
 
   <include layout="@layout/app_toolbar" />
 
